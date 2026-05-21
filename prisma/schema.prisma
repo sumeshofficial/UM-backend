@@ -12,7 +12,7 @@ enum Role {
   ADMIN
 }
 
-enum UserStatus {
+enum Status {
   ACTIVE
   BLOCKED
 }
@@ -21,7 +21,7 @@ model User {
   id           String     @id @db.VarChar(36)
   fullname     String     @db.VarChar(100)
   email        String     @unique
-  status       UserStatus @default(ACTIVE)
+  status       Status     @default(ACTIVE)
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
   isBlocked    Boolean    @default(false)
