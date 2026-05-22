@@ -24,6 +24,6 @@
     "isolatedModules": true,
     "skipLibCheck": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist", "eslint.config.js"]
+  "include": ["src", "scripts"],
+  "exclude": ["node_modules", "dist", "eslint.config.js", "scripts"]
 }
