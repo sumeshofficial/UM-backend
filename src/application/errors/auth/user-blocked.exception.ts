@@ -1,6 +1,6 @@
 import { HttpStatusCode } from "@shared/constants/http-status";
-import { AppException } from "@shared/errors/app.exception.js";
-import { ErrorCodes } from "@shared/errors/error-codes.js";
+import { AppException } from "@shared/errors/app.exception";
+import { ErrorCodes } from "@shared/errors/error-codes";
 
 export class UserBlockedException extends AppException {
   constructor() {
