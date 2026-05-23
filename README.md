@@ -6,9 +6,9 @@ This project demonstrates modern backend architecture concepts including dual da
 
 ---
 
-# 🚀 Features
+# Features
 
-## 👤 Authentication & User Management
+## Authentication & User Management
 
 - User Registration
 - User Login
@@ -17,7 +17,7 @@ This project demonstrates modern backend architecture concepts including dual da
 - Role-Based Access Control (RBAC)
 - Protected Routes
 
-## 🔐 Admin Features
+## Admin Features
 
 - Admin Authentication
 - Get All Users
@@ -25,7 +25,7 @@ This project demonstrates modern backend architecture concepts including dual da
 - Block / Unblock Users
 - Admin Protected APIs
 
-## 🔄 Dual Database Synchronization
+## Dual Database Synchronization
 
 This project uses a dual database architecture:
 
@@ -67,7 +67,7 @@ MongoDB Mirror DB
 
 ---
 
-# 🏗️ Architecture
+# Architecture
 
 The project follows Clean Architecture principles.
 
@@ -115,7 +115,7 @@ src/
 
 ---
 
-# 🧠 Architectural Concepts Used
+# Architectural Concepts Used
 
 ## Clean Architecture
 
@@ -147,7 +147,7 @@ Background tasks are processed asynchronously using:
 
 ---
 
-# 🛡️ Security
+# Security
 
 - Password Hashing using bcrypt / argon2
 - JWT Authentication
@@ -157,7 +157,7 @@ Background tasks are processed asynchronously using:
 
 ---
 
-# 📦 Tech Stack
+# Tech Stack
 
 | Technology | Purpose |
 |---|---|
@@ -173,7 +173,7 @@ Background tasks are processed asynchronously using:
 
 ---
 
-# ⚙️ Installation
+# Installation
 
 ## 1. Clone Repository
 
@@ -237,7 +237,7 @@ npm run dev
 
 ---
 
-# 📜 Available Scripts
+# Available Scripts
 
 ```bash
 npm run dev        # Start development server
@@ -248,7 +248,7 @@ npm run lint       # Run ESLint
 
 ---
 
-# 🧪 Queue Testing
+# Queue Testing
 
 Example queue test:
 
@@ -258,7 +258,7 @@ npx tsx scripts/test-created-user-sync.ts
 
 ---
 
-# 🔄 Queue Workflow Example
+# Queue Workflow Example
 
 ```text
 Register User
@@ -274,7 +274,7 @@ Sync User to MongoDB
 
 ---
 
-# 📌 Key Learnings Demonstrated
+# Key Learnings Demonstrated
 
 - Clean Architecture
 - SOLID Principles
@@ -289,12 +289,12 @@ Sync User to MongoDB
 
 ---
 
-# 📄 License
+# License
 
 This project is created for learning and educational purposes.
 
 ---
 
-# 👨‍💻 Author
+# Author
 
 Developed by Sumesh J
