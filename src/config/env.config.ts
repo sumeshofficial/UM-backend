@@ -11,6 +11,8 @@ const envSchema = z.object({
   BULLMQ_BACKOFF_DELAY: z.coerce.number().min(100).default(1000),
   BULLMQ_REMOVE_ON_COMPLETE: z.coerce.number().int().min(1).default(100),
   BULLMQ_REMOVE_ON_FAIL: z.coerce.number().int().min(1).default(50),
+  JWT_SECRET: z.string().min(1, "JWT_SECRET is required"),
+  JWT_EXPIRES_IN: z.string().default("1d"),
 });
 
 const parsedEnv = envSchema.safeParse(process.env);

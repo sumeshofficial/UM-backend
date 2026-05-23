@@ -5,7 +5,11 @@ import { USER_QUEUE_CONSTANTS } from "@infrastructure/constants/queue/user-queue
 import { SyncUpdatedUserJob } from "@application/types/queue/sync-updated-user-job.type";
 
 export class BullMQUserQueue implements UserQueuePort {
-  async addSyncUserJob(data: SyncCreatedUserJob | SyncUpdatedUserJob): Promise<void> {
+  async syncCreatedUserJob(data: SyncCreatedUserJob): Promise<void> {
     await userQueue.add(USER_QUEUE_CONSTANTS.SYNC_CREATED_USER, data);
+  }
+  
+  async syncUpdatedUserJob(data: SyncUpdatedUserJob): Promise<void> {
+    await userQueue.add(USER_QUEUE_CONSTANTS.SYNC_UPDATED_USER, data);
   }
 }

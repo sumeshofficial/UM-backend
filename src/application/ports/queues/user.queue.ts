@@ -2,5 +2,6 @@ import { SyncCreatedUserJob } from "@application/types/queue/sync-created-user-j
 import { SyncUpdatedUserJob } from "@application/types/queue/sync-updated-user-job.type";
 
 export interface UserQueuePort {
-  addSyncUserJob(data: SyncCreatedUserJob| SyncUpdatedUserJob): Promise<void>;
+  syncCreatedUserJob(data: SyncCreatedUserJob): Promise<void>;
+  syncUpdatedUserJob(data: SyncUpdatedUserJob): Promise<void>;
 }
