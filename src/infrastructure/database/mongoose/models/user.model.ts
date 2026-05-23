@@ -3,7 +3,7 @@ import { Schema, model, type InferSchemaType } from "mongoose";
 
 const userSchema = new Schema(
   {
-    postgresId: { type: String, required: true, unique: true },
+    userId: { type: String, required: true, unique: true },
     fullname: { type: String, required: true, },
     email: { type: String, required: true, },
     role: { type: String, required: true, },

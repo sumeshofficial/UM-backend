@@ -35,7 +35,7 @@ export class RegisterUseCase implements IRegisterUseCase {
     await this._userRepository.save(user);
 
     await this._userQueue.syncCreatedUserJob({
-      postgresId: user.id,
+      userId: user.id,
       fullname: user.fullname,
       email: user.email,
       role: user.role ,

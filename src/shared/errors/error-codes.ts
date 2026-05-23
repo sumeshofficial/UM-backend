@@ -5,6 +5,8 @@ export const ErrorCodes = {
   INVALID_CREDENTIALS: "INVALID_CREDENTIALS",
   VALIDATION_ERROR: "VALIDATION_ERROR",
   USER_BLOCKED: "USER_BLOCKED",
+  FORBIDDEN: "FORBIDDEN",
+  USER_NOTFOUND: "USER_NOTFOUND",
 };
 
 export type ErrorCode = (typeof ErrorCodes)[keyof typeof ErrorCodes];

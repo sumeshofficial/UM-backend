@@ -10,7 +10,7 @@ const testQueue = async (): Promise<void> => {
   await userQueue.add(
     USER_QUEUE_CONSTANTS.SYNC_UPDATED_USER,
     {
-      postgresId: "1",
+      userId: "1",
       
       updates: {
         status: "ACTIVE",

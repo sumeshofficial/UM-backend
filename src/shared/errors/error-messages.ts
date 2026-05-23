@@ -7,4 +7,6 @@ export const ErrorMessages: Record<ErrorCode, string> = {
     [ErrorCodes.INVALID_CREDENTIALS]: "Invalid credentials",
     [ErrorCodes.VALIDATION_ERROR]: "Validation failed",
     [ErrorCodes.USER_BLOCKED]: "User is blocked",
+    [ErrorCodes.FORBIDDEN]: "Forbidden",
+    [ErrorCodes.USER_NOTFOUND]: "User not found"
 }

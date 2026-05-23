@@ -2,6 +2,9 @@ import { LoginUseCase } from "@application/use-cases/auth/login.usecase";
 import { RegisterUseCase } from "@application/use-cases/auth/register.usecase";
 import { SyncCreatedUserUseCase } from "@application/use-cases/sync-user/sync-created-user.usecase";
 import { SyncUpdatedUserUseCase } from "@application/use-cases/sync-user/sync-updated-user.usecase";
+import { BlockOrUnBlockUserUseCase } from "@application/use-cases/user/block-or-unblock-user.usecase";
+import { GetAllUsersUseCase } from "@application/use-cases/user/get-all-users.usecase";
+import { GetUserUseCase } from "@application/use-cases/user/get-user.usecase";
 import { env } from "@config/env.config";
 import {
   connectMongo,
@@ -18,8 +21,10 @@ import { Argon2PasswordHasher } from "@infrastructure/services/argon2-password-h
 import { JwtTokenService } from "@infrastructure/services/jwt-token.service";
 import { UserWorker } from "@infrastructure/workers/user.worker";
 import { AuthController } from "@presentation/http/controller/auth.controller";
+import { UserController } from "@presentation/http/controller/user.controller";
 import { errorHandlerMiddleware } from "@presentation/http/middleware/error-handle.middleware";
 import { createAuthRouter } from "@presentation/http/routes/auth.routes";
+import { createUserRouter } from "@presentation/http/routes/user.routes";
 import express from "express";
 
 const app = express();
@@ -38,18 +43,33 @@ const registerUserCase = new RegisterUseCase(
   argon2PasswordHasher,
   bullMQUserQueue
 );
-
 const loginUseCase = new LoginUseCase(
   prismaUserRepository,
   argon2PasswordHasher,
   jwtTokenService
 );
 
+const getAllUsersUseCase = new GetAllUsersUseCase(prismaUserRepository);
+const getUserUseCase = new GetUserUseCase(prismaUserRepository);
+const blockOrUnBlockUserUseCase = new BlockOrUnBlockUserUseCase(
+  prismaUserRepository,
+  bullMQUserQueue
+);
+
 const authController = new AuthController(registerUserCase, loginUseCase);
+
+const userController = new UserController(
+  getAllUsersUseCase,
+  getUserUseCase,
+  blockOrUnBlockUserUseCase
+);
 
 const authRouter = createAuthRouter(authController, jwtTokenService);
 
+const userRouter = createUserRouter(userController, jwtTokenService);
+
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/users", userRouter);
 
 app.use(errorHandlerMiddleware());
 

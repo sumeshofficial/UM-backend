@@ -8,55 +8,56 @@ import type { User } from "@domain/entities/user.entity";
 import type { UserRepository } from "@domain/repositories/user.repository";
 
 export class LoginUseCase implements ILoginUseCase {
-    constructor(
-        private readonly _userRepository: UserRepository,
-        private readonly _passwordHasher: PasswordHasher,
-        private readonly _tokenService: TokenService,
-    ) {}
+  constructor(
+    private readonly _userRepository: UserRepository,
+    private readonly _passwordHasher: PasswordHasher,
+    private readonly _tokenService: TokenService
+  ) {}
 
-    private async _getUserOrFail(email: string): Promise<User> {
-        const user = await this._userRepository.findByEmail(email);
+  private async _getUserOrFail(email: string): Promise<User> {
+    const user = await this._userRepository.findByEmail(email);
 
-        if (!user) {
-            throw new InvalidCredentialsException();
-        }
-
-        return user;
+    if (!user) {
+      throw new InvalidCredentialsException();
     }
 
-    private _userBlockedOrNot(user: User): void {
-        if (user.isBlocked) {
-            throw new UserBlockedException();
-        }
+    return user;
+  }
+
+  private _userBlockedOrNot(user: User): void {
+    if (user.isBlocked) {
+      throw new UserBlockedException();
     }
+  }
 
-    private async _validatePassword(password: string, user: User) {
-        const isValid = await this._passwordHasher.compare(
-            password,
-            user.passwordHashValue
-        );
+  private async _validatePassword(password: string, user: User) {
+    const isValid = await this._passwordHasher.compare(
+      password,
+      user.passwordHashValue
+    );
 
-        if (!isValid) {
-            throw new InvalidCredentialsException();
-        }
+    if (!isValid) {
+      throw new InvalidCredentialsException();
     }
+  }
 
-    private _generateToken(user: User): string {
-        return this._tokenService.generate({
-            sub: user.id,
-            email: user.email
-        });
-    }
+  private _generateToken(user: User): string {
+    return this._tokenService.generate({
+      sub: user.id,
+      email: user.email,
+      role: user.role,
+    });
+  }
 
-    async execute(input: LoginDto): Promise<{ accessToken: string }> {
-        const user = await this._getUserOrFail(input.email);
+  async execute(input: LoginDto): Promise<{ accessToken: string }> {
+    const user = await this._getUserOrFail(input.email);
 
-        await this._validatePassword(input.password, user);
+    await this._validatePassword(input.password, user);
 
-        this._userBlockedOrNot(user);
+    this._userBlockedOrNot(user);
 
-        const accessToken = this._generateToken(user);
+    const accessToken = this._generateToken(user);
 
-        return { accessToken };
-    }
+    return { accessToken };
+  }
 }

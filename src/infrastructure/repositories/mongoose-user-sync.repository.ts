@@ -10,7 +10,7 @@ export class MongooseUserSyncRepository implements SyncUserRepository {
 
   async updated(data: SyncUpdatedUserData): Promise<void> {
     await UserModel.updateOne(
-      { postgresId: data.postgresId },
+      { userId: data.userId },
       { $set: data.updates }
     );
   }
